@@ -8,6 +8,6 @@ evolving work in progresss.
 ## Scripts
 
 - [`disable-touchpad.sh`](disable-touchpad.sh): disable keyboard
-- [`listppa.sh`](list-ppa.sh): list installed ppa repository
+- [`listppa.sh`](listppa.sh): list installed ppa repository
 - [`remap-esc-to-capslock.sh`](remap-esc-to-capslock.sh): remap ESC key to
   capslock
