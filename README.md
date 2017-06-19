@@ -7,7 +7,10 @@ evolving work in progresss.
 
 ## Scripts
 
+- [`bg-multi-screen.sh`](bg-multi-screen.sh): background dynamic positionning
 - [`disable-touchpad.sh`](disable-touchpad.sh): disable keyboard
+- [`hxvw`](hxvw): hex color viewer (trigger notifications based on hex color).
+  Require dunst to work.
 - [`listppa.sh`](listppa.sh): list installed ppa repository
 - [`remap-esc-to-capslock.sh`](remap-esc-to-capslock.sh): remap ESC key to
   capslock
