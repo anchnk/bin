@@ -19,5 +19,6 @@ fi
 
 if  arg_is_hex_color "$hex_color";
 then
-  notify-send -h string:bgcolor:"$hex_color" -h string:fgcolor:"$hex_color" "$RANDOM"
+  notify-send -h string:bgcolor:"$hex_color" -h string:fgcolor:"$hex_color" \
+  "$RANDOM"
 fi
