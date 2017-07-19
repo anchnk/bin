@@ -6,6 +6,5 @@ if [ $CONNECTED_DISPLAY -eq 1 ];
   then
     feh --scale-down --bg-scale "/usr/share/backgrounds/background.png"
   else
-    feh --scale-down --xinerama-index 1 \
-      --bg-scale "/usr/share/backgrounds/background.png"
+    feh --scale-down --bg-scale "/usr/share/backgrounds/background.png"
 fi
