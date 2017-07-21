@@ -3,7 +3,7 @@
 This repository holds custom scripts I have created, made, borrowed, hacked.
 
 My `$HOME` folder contains a `bin` folder which is a **symbolic link** of
-`$HOME/code/public/anchnk/dotbin`.
+`$HOME/code/public/anchnk/dotbin`.<br />
 `$HOME/bin` is in `$PATH` so that each script can be executed just by calling
 its name.
 
