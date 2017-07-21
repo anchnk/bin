@@ -5,12 +5,13 @@ that folder and will evolve with time.
 note: this repository contains experimental code and should be considered as an
 evolving work in progresss.
 
-## Scripts
-
-- [`bg-multi-screen.sh`](bg-multi-screen.sh): background dynamic positionning
-- [`disable-touchpad.sh`](disable-touchpad.sh): disable keyboard
-- [`hxvw`](hxvw): hex color viewer (trigger notifications based on hex color).
-  Require dunst to work.
-- [`listppa.sh`](listppa.sh): list installed ppa repository
-- [`remap-esc-to-capslock.sh`](remap-esc-to-capslock.sh): remap ESC key to
-  capslock
+Script | Purpose
+-------|------------
+[`disable-touchpad.sh`](disable-touchpad.sh) | TBD
+[`hxvw`](hxvw) | TBD
+[`launch-polybar.sh`](launch-polybar.sh) | TBD
+[`ls-ppas.sh`](ls-ppas.sh) | TBD
+[`monitors-setup.sh`](monitors-setup.sh) | TBD
+[`remap-esc-to-capslock`](remap-esc-to-capslock) | TBD
+[`set-bg.sh`](set-bg.sh) | TBD
+[`skype`](skype) | TBD
