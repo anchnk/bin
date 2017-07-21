@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
-CONNECTED_DISPLAY=$(xrandr | cut -d' ' -f2 | grep '^connected' | wc -l)
+CONNECTED_MONITORS=`xrandr | grep " connected " | wc -l`
 
-if [ $CONNECTED_DISPLAY -eq 1 ];
+if [ $CONNECTED_MONITORS -eq 1 ]
   then
     feh --scale-down --bg-scale "/usr/share/backgrounds/background.png"
   else
