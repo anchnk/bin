@@ -12,6 +12,6 @@ Script | Purpose
 [`launch-polybar.sh`](launch-polybar.sh) | TBD
 [`ls-ppas.sh`](ls-ppas.sh) | TBD
 [`monitors-setup.sh`](monitors-setup.sh) | TBD
-[`remap-esc-to-capslock`](remap-esc-to-capslock) | TBD
+[`remap-esc-to-capslock.sh`](remap-esc-to-capslock.sh) | TBD
 [`set-bg.sh`](set-bg.sh) | TBD
 [`skype`](skype) | TBD
