@@ -1,10 +1,12 @@
 # dotbin
 
-This repository holds custom scripts I have created, made, borrowed, hacked. It
-sits in my $HOME folder under a `bin` folder. That repository is a mirror of
-that folder and will evolve with time.
+This repository holds custom scripts I have created, made, borrowed, hacked.
 
-note: this repository contains experimental code and should be considered as an
+My `$HOME` folder contains a `bin` folder which is a symbolic link of
+`$HOME/code/public/anchnk/dotbin`. `$HOME/bin` is in `$PATH` so that each
+script can be executed just by calling its name.
+
+Note: this repository contains experimental code and should be considered as an
 evolving work in progresss.
 
 Script | Purpose
