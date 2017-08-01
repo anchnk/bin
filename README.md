@@ -11,14 +11,17 @@ its name.
 
 Script | Purpose
 -------|------------
-[`disable-touchpad.sh`](disable-touchpad.sh) | TBD
-[`hxvw`](hxvw) | TBD
-[`launch-polybar.sh`](launch-polybar.sh) | TBD
-[`ls-ppas.sh`](ls-ppas.sh) | TBD
-[`monitors-setup.sh`](monitors-setup.sh) | TBD
-[`remap-esc-to-capslock.sh`](remap-esc-to-capslock.sh) | TBD
-[`set-bg.sh`](set-bg.sh) | TBD
-[`skype`](skype) | TBD
+[`disable-touchpad.sh`](disable-touchpad.sh) | disable laptop trackball
+[`hxvw`](hxvw) | visualise hex colors with dunst
+[`launch-polybar.sh`](launch-polybar.sh) | kill all polybar running instances
+and start a new one
+[`ls-ppas.sh`](ls-ppas.sh) | list installed PPAs
+[`monitors-setup.sh`](monitors-setup.sh) | configure randr according to the
+number of connected monitors
+[`remap-esc-to-capslock.sh`](remap-esc-to-capslock.sh) | remap capslock to
+escape key for vim / neovim
+[`set-bg.sh`](set-bg.sh) | set desktop's wallpaper using feh
+[`skype`](skype) | launch skype through proxy (CNTLM)
 
 Note: this repository contains experimental code and should be considered as an
 evolving work in progresss.
