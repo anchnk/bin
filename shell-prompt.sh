@@ -8,63 +8,74 @@
 # present menu for user to choose which workspace to open
 
 function prompt_headline() {
-  local USER=get_current_user
-  echo "Welcome `whoami`," `date '+%a%e/%m/%y %k:%M'`
+  echo "Welcome $(whoami), $(date '+%a%e/%m/%y %k:%M')"
 }
 
-PROMPT_HEADLINE=$(prompt_headline)
+prompt_headline=$(prompt_headline)
 
 function draw_separator() {
-  PROMPT_HEADLINE_LENGTH=${#PROMPT_HEADLINE}
-  printf '%.s-' {1..35}
+  local headline_length=${#prompt_headline}
+  printf '%*s' "$headline_length" "" | tr ' ' -
 }
 
 function draw_menu() {
-  local POS=0
-  local CURRENT_LINE=0
+  local current_line=0
   COLUMNS=$(tput cols)
   LINES=$(tput lines)
-  X=$(( ( $LINES - 0 ) / 2 ))
-  Y=$(( ( $COLUMNS - 35 ) / 2 ))
+  x=$(( ( LINES - 0 ) / 2 ))
+  y=$(( ( COLUMNS - 35 ) / 2 ))
 
-  options=($(tmux list-sessions -F "#S" 2>/dev/null) "Start a new tmux session" "Start a bash shell" "Exit")
+  options=($(tmux list-sessions -F "#S" 2>/dev/null) "start a new tmux session" "start a bash shell" "exit")
 
   tput clear
-  tput cup $X $Y
-  CURRENT_LINE=$X
+  tput cup $x $y
+  current_line=$x
   prompt_headline
-  ((CURRENT_LINE++))
+  ((current_line++))
 
-  tput cup $CURRENT_LINE $Y
+  tput cup $current_line $y
   draw_separator
-  ((CURRENT_LINE++))
+  ((current_line++))
 
   for ((i=0;i<${#options[@]};i++)); do
-    local DISPLAY_INDEX=$(( $i + 1 ))
-    tput cup $CURRENT_LINE $Y
+    local DISPLAY_INDEX=$(( i + 1 ))
+    tput cup $current_line $y
     echo "$DISPLAY_INDEX) ${options[$i]}"
-    ((CURRENT_LINE++))
+    ((current_line++))
   done
 
-  tput cup $CURRENT_LINE $Y
+  tput cup $current_line $y
   draw_separator
-  ((CURRENT_LINE++))
+  ((current_line++))
 
-  tput cup $CURRENT_LINE $Y
+  tput cup $current_line $y
+}
+
+function compute_menu_indexes() {
+  local tmux_sessions_number
+  tmux_sessions_number=$(tmux ls | wc -l)
+
+  tmux_new_session_index=$((tmux_sessions_number + 1))
+  bash_shell_index=$((tmux_new_session_index + 1))
+  exit_index=$((bash_shell_index + 1))
+}
+
+while draw_menu;
+  compute_menu_indexes
+  echo "${options[1]}"
   read -p 'What would you like to start with ? ' opt
-  case $opt in
-    2)
-      read -p "Enter new session name: " SESSION_NAME
-      tmux new -s "$SESSION_NAME"
-      break;;
-    3)
+  do case $opt in
+    $tmux_new_session_index)
+      tput clear
+      read -p "Enter new session name: " session_name
+      tmux new -s "$session_name"
+      ;;
+    $bash_shell_index)
       tput clear
       bash --login
       ;;
-    4)
+    $exit_index)
       break
       ;;
   esac
-}
-
-draw_menu
+done
