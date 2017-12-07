@@ -7,23 +7,23 @@
 
 # present menu for user to choose which workspace to open
 
-function prompt_headline() {
+prompt_headline() {
   echo "Welcome $(whoami), $(date '+%a%e/%m/%y %k:%M')"
 }
 
 prompt_headline=$(prompt_headline)
 
-function draw_separator() {
+draw_separator() {
   local headline_length=${#prompt_headline}
   printf '%*s' "$headline_length" "" | tr ' ' -
 }
 
-function draw_menu() {
+draw_menu() {
   local current_line=0
-  COLUMNS=$(tput cols)
-  LINES=$(tput lines)
-  x=$(( ( LINES - 0 ) / 2 ))
-  y=$(( ( COLUMNS - 35 ) / 2 ))
+  columns=$(tput cols)
+  lines=$(tput lines)
+  x=$(( ( lines - 0 ) / 2 ))
+  y=$(( ( columns - 35 ) / 2 ))
 
   options=($(tmux list-sessions -F "#S" 2>/dev/null) "start a new tmux session" "start a bash shell" "exit")
 
@@ -60,22 +60,43 @@ function compute_menu_indexes() {
   exit_index=$((bash_shell_index + 1))
 }
 
+tmux_attach_session() {
+  local session_name=$1
+  tmux attach-session -t "$session_name"
+}
+
+tmux_start_new_session() {
+  tput clear
+  read -p "Enter new session name: " session_name
+  tmux new -s "$session_name"
+}
+
+bash_login() {
+  tput clear
+  bash --login
+}
+
 while draw_menu;
   compute_menu_indexes
-  echo "${options[1]}"
   read -p 'What would you like to start with ? ' opt
-  do case $opt in
-    $tmux_new_session_index)
-      tput clear
-      read -p "Enter new session name: " session_name
-      tmux new -s "$session_name"
-      ;;
-    $bash_shell_index)
-      tput clear
-      bash --login
-      ;;
-    $exit_index)
-      break
-      ;;
-  esac
+  do
+    tmux_sessions=$(tmux ls | wc -l)
+    if [ "$opt" -le "$tmux_sessions" ];
+    then
+      echo "${options[((opt - 1))]}"
+      tmux_attach_session "${options[((opt - 1))]}"
+    else
+      case $opt in
+        $tmux_new_session_index)
+          tmux_start_new_session
+          ;;
+        $bash_shell_index)
+          bash_login
+          ;;
+        $exit_index)
+          break
+          ;;
+      esac
+    fi
+    break
 done
