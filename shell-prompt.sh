@@ -11,15 +11,20 @@ prompt_headline() {
   echo "Welcome $(whoami), $(date '+%a%e/%m/%y %k:%M')"
 }
 
-prompt_headline=$(prompt_headline)
+get_tmux_sessions_number() {
+  tmux ls 2>/dev/null | wc -l
+}
+
+tmux_sessions_number=$(get_tmux_sessions_number)
 
 draw_separator() {
   local headline_length=${#prompt_headline}
-  printf '%*s' "$headline_length" "" | tr ' ' -
+  local separator_length=$(( headline_length + 2))
+  printf '%*s' "$separator_length" "" | tr ' ' -
 }
 
 draw_menu() {
-  local current_line=0
+  current_line=0
   columns=$(tput cols)
   lines=$(tput lines)
   x=$(( ( lines - 0 ) / 2 ))
@@ -52,10 +57,10 @@ draw_menu() {
 }
 
 function compute_menu_indexes() {
-  local tmux_sessions_number
-  tmux_sessions_number=$(tmux ls | wc -l)
+  local dynamic_menu_items_number
+  dynamic_menu_items_number=$(get_tmux_sessions_number)
 
-  tmux_new_session_index=$((tmux_sessions_number + 1))
+  tmux_new_session_index=$((dynamic_menu_items_number + 1))
   bash_shell_index=$((tmux_new_session_index + 1))
   exit_index=$((bash_shell_index + 1))
 }
@@ -76,12 +81,12 @@ bash_login() {
   bash --login
 }
 
+prompt_headline=$(prompt_headline)
 while draw_menu;
   compute_menu_indexes
   read -p 'What would you like to start with ? ' opt
   do
-    tmux_sessions=$(tmux ls | wc -l)
-    if [ "$opt" -le "$tmux_sessions" ];
+    if [ "$opt" -le "$tmux_sessions_number" ];
     then
       echo "${options[((opt - 1))]}"
       tmux_attach_session "${options[((opt - 1))]}"
