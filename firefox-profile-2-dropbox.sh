@@ -27,7 +27,7 @@ save_firefox_profile_to_dropbox() {
   mkdir -p "$archive_directory"
   tar -jcvf "$archive_path" "$firefox_profile_path"
   gpg -c "$archive_path"
-  rclone copy "$encrypted_archive_path" dropbox:Backups/"$today"
+  rclone copy "$encrypted_archive_path" dropbox:Backups/Bookmarks/"$today"
   rm -r "$archive_directory"
 }
 
